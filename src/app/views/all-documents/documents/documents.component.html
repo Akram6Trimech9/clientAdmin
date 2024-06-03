@@ -1,0 +1,32 @@
+<div class="container mt-3">
+    <h2>Documents</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Category</th>
+          <th>Description</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let document of documents">
+          <td>{{ document.title }}</td>
+          <td>{{ document.category }}</td>
+          <td>{{ document.description |truncate }}</td>
+
+           <td>
+            <button class="btn btn-primary btn-sm mr-2" (click)="accessDocument(document)">
+              Access
+            </button>
+            <button class="btn btn-warning btn-sm mr-2"  >
+              Update
+            </button>
+            <button class="btn btn-danger btn-sm"  >
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

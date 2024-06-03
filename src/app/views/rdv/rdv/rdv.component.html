@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="table-wrapper">
+      <div class="table-title">
+        <div class="row">
+          <div class="col-sm-6">
+            <h2>  <b>Rendez vous </b></h2>
+          </div>
+          <div class="col-sm-6">
+           </div>
+        </div>
+      </div>
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>Nom </th>
+            <th>Date</th>
+            <th>Email</th>
+            <th>Message</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let rdv of rdvs">
+          
+            <td>{{ rdv.name}}</td>
+            <td>{{rdv.date | date}}</td>
+            <td>{{rdv.email}}</td>
+            <td>{{ rdv.message | truncate:20 }}</td>
+            <td>{{rdv.status }}</td>
+
+            <td>
+                <ng-container *ngIf="rdv.status === 'accepted'">
+ 
+                  <a class="btn btn-warning" style="color: white;" data-toggle="modal" (click)="detailRdv(rdv._id)">details</a>
+                </ng-container>
+                <ng-container *ngIf="rdv.status !== 'accepted'">
+                  <a class="btn btn-success" style="color: white;" (click)="acceptRdv(rdv)" data-toggle="modal">accept</a>
+                  <a class="btn btn-danger" style="color: white;" (click)="refuseRdv(rdv)" data-toggle="modal">refuse</a>
+                  <a class="btn btn-warning" style="color: white;" data-toggle="modal" (click)="detailRdv(rdv._id)" >details</a>
+                </ng-container>
+              </td>
+          </tr>
+       
+        </tbody>
+      </table>
+   
+    </div>
+  </div>
+ 
+  

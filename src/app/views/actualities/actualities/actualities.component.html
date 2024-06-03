@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="table-wrapper">
+      <div class="table-title">
+        <div class="row">
+          <div class="col-sm-6">
+            <h2>  <b>ACTUALITIES </b></h2>
+          </div>
+          <div class="col-sm-6">
+           </div>
+        </div>
+      </div>
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>Title </th>
+            <th>Subtitle </th>
+            <th>Image </th>
+             <th>Description</th>
+             <th>Category</th>
+              <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of acutalities" >
+          
+            <td>{{ item.title}}</td>
+            <td>{{item.subtitle}}</td>
+            <td><img width="80" [src]="item.file" /></td>
+             <td>{{item.description}}</td>
+             <td>{{item.category?.title}}</td>
+
+            <td>
+                   <a class="edit" data-toggle="modal"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                  
+              </td>
+          </tr>
+       
+        </tbody>
+      </table>
+   
+    </div>
+  </div>
+ 

@@ -1,0 +1,37 @@
+<div class="container mt-3">
+    <h2>Upload Document</h2>
+    <form [formGroup]="documentForm" (ngSubmit)="onSubmit()">
+      <div class="form-group  mt-3">
+        <label for="title">Title:</label>
+        <input type="text" class="form-control" id="title" formControlName="title">
+        <div *ngIf="documentForm.get('title')?.invalid && (documentForm.get('title')?.dirty || documentForm.get('title')?.touched)" class="text-danger">
+          <div *ngIf="documentForm.get('title')?.errors?.['required']">Title is required.</div>
+        </div>
+      </div>
+      <div class="form-group  mt-3">
+        <label for="category">Category:</label>
+        <select class="form-control" id="category" formControlName="category" style="color: #2d9ca0;">
+          <option value="">Select a category</option>
+          <option *ngFor="let category of documentCategories" [value]="category">{{ category }}</option>
+        </select>
+        <div *ngIf="documentForm.get('category')?.invalid && (documentForm.get('category')?.dirty || documentForm.get('category')?.touched)" class="text-danger">
+          <div *ngIf="documentForm.get('category')?.errors?.['required']">Category is required.</div>
+        </div>
+      </div>
+      <div class="form-group mt-3">
+        <label for="description">Description:</label>
+        <textarea class="form-control" id="description" formControlName="description"></textarea>
+        <div *ngIf="documentForm.get('description')?.invalid && (documentForm.get('description')?.dirty || documentForm.get('description')?.touched)" class="text-danger">
+          <div *ngIf="documentForm.get('description')?.errors?.['required']">Description is required.</div>
+        </div>
+      </div>
+      <div class="form-group mt-3 mb-5">
+        <label for="files">Files:</label>
+        <input type="file"  multiple class="form-control-file" id="files" (change)="onFileSelected($event)">
+        <div *ngIf="documentForm.get('files')?.invalid && (documentForm.get('files')?.dirty || documentForm.get('files')?.touched)" class="text-danger">
+          <div *ngIf="documentForm.get('files')?.errors?.['required']">At least one file is required.</div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="documentForm.invalid" style="background-color: #2d9ca0; border-color: #2d9ca0;">Submit</button>
+    </form>
+  </div>
