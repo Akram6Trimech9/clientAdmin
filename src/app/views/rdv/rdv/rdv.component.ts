@@ -23,7 +23,7 @@ export class RdvComponent implements OnInit {
     });
   }
   detailRdv(id:any){
-    this.router.navigateByUrl(`/rdv/${id}`)
+    this.router.navigateByUrl(`/dash/rdv/${id}`)
   }
   acceptRdv(rdv: any) {
     this.rdvService.acceptRdv(rdv._id).subscribe(

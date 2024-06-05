@@ -22,29 +22,38 @@ import {
   TextColorDirective,
   ThemeDirective
 } from '@coreui/angular';
-import { NgStyle, NgTemplateOutlet } from '@angular/common';
-import { ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
+import { CommonModule, NgStyle, NgTemplateOutlet } from '@angular/common';
+import { ActivatedRoute, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { IconDirective } from '@coreui/icons-angular';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { delay, filter, map, tap } from 'rxjs/operators';
 import { HttpClientModule } from '@angular/common/http';
 import {NotificationService} from '../../../services/notification.service'
+import { AuthService } from 'src/app/services/auth.service';
+import { CurrentUserService } from 'src/app/services/currentUser.service';
 @Component({
   selector: 'app-default-header',
   templateUrl: './default-header.component.html',
   standalone: true,
   providers:[NotificationService],
-  imports: [ContainerComponent,HttpClientModule, HeaderTogglerDirective, SidebarToggleDirective, IconDirective, HeaderNavComponent, NavItemComponent, NavLinkDirective, RouterLink, RouterLinkActive, NgTemplateOutlet, BreadcrumbRouterComponent, ThemeDirective, DropdownComponent, DropdownToggleDirective, TextColorDirective, AvatarComponent, DropdownMenuDirective, DropdownHeaderDirective, DropdownItemDirective, BadgeComponent, DropdownDividerDirective, ProgressBarDirective, ProgressComponent, NgStyle]
+  imports: [CommonModule,ContainerComponent,HttpClientModule, HeaderTogglerDirective, SidebarToggleDirective, IconDirective, HeaderNavComponent, NavItemComponent, NavLinkDirective, RouterLink, RouterLinkActive, NgTemplateOutlet, BreadcrumbRouterComponent, ThemeDirective, DropdownComponent, DropdownToggleDirective, TextColorDirective, AvatarComponent, DropdownMenuDirective, DropdownHeaderDirective, DropdownItemDirective, BadgeComponent, DropdownDividerDirective, ProgressBarDirective, ProgressComponent, NgStyle]
 })
 export class DefaultHeaderComponent extends HeaderComponent implements  OnInit {
-
+ notifications:any[] =[]
 
 
   
   ngOnInit(): void {
-    this.notifService.getMessages().subscribe(res => { 
-       console.log(res)
+    this.currentService.currentUser$.subscribe(res => { 
+       this.current = res
     })
+    this.notifService.getNotificationByUserId(this.current._id).subscribe(res=>{
+      this.notifications = res
+    })
+    this.notifService.getMessages().subscribe(res => { 
+      this.notifications.push(res.notification)
+    })
+    this.notifService.connectToServer()
   }
   readonly #activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   readonly #colorModeService = inject(ColorModeService);
@@ -61,8 +70,8 @@ export class DefaultHeaderComponent extends HeaderComponent implements  OnInit {
     const currentMode = this.colorMode();
     return this.colorModes.find(mode=> mode.name === currentMode)?.icon ?? 'cilSun';
   });
-
-  constructor(private notifService : NotificationService ) {
+  current : any
+  constructor(private notifService : NotificationService , private authService :AuthService , private router :Router , private currentService : CurrentUserService) {
     super();
     this.#colorModeService.localStorageItemName.set('coreui-free-angular-admin-template-theme-default');
     this.#colorModeService.eventName.set('ColorSchemeChange');
@@ -156,5 +165,21 @@ export class DefaultHeaderComponent extends HeaderComponent implements  OnInit {
     { id: 3, title: 'Add new layouts', value: 75, color: 'info' },
     { id: 4, title: 'Angular Version', value: 100, color: 'success' }
   ];
-
+  logout(){
+    this.authService.logout()
+    this.router.navigate(['/'])
+  }
+  closeNotification(id: any) { 
+    this.notifications = this.notifications.filter(notification => notification._id !== id);
+    this.notifService.deleteNotif(id).subscribe(
+      () => {
+        console.log(`Notification with ID ${id} deleted successfully.`);
+      },
+      (error) => {
+        console.error(`Error deleting notification with ID ${id}:`, error);
+      }
+    );
+  }
+  
+  
 }

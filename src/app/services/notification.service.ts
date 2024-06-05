@@ -1,23 +1,45 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import * as io from 'socket.io-client';
 import { Observable } from 'rxjs';
+import { io, Socket } from 'socket.io-client';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotificationService {
-  private socket = io.io('*');
+  private socket: Socket;
+   url='http://localhost:3000/api/notifications'
+  constructor(private _http: HttpClient) {
+    this.socket = io('http://localhost:3000');  
+  }
 
-  
-  getMessages() {
-    let observable = new Observable<any>(observer => {
+  getMessages(): Observable<any> {
+    return new Observable<any>(observer => {
       this.socket.on('rdv-created', (data) => {
+        console.log("Received new appointment:", data);
         observer.next(data);
       });
-      return () => { 
-
-       };  
+      return () => {
+        this.socket.off('rdv-created');
+      };
     });
-    return observable;
+  }
+
+  deleteNotif(id :any): Observable<any>{ 
+   return this._http.delete<any>(`${this.url}/${id}`)
+  }
+  
+
+  getNotificationByUserId(id:any) :Observable<any[]>{
+     return this._http.get<any[]>(`${this.url}/${id}`)
+  }
+  connectToServer() {
+    this.socket.emit('connection', { token: 'kjqlkjqsd' });
+  }
+
+  disconnect() {
+    if (this.socket) {
+      this.socket.disconnect();
+    }
   }
 }

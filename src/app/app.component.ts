@@ -4,6 +4,7 @@ import { Title } from '@angular/platform-browser';
 
 import { IconSetService } from '@coreui/icons-angular';
 import { iconSubset } from './icons/icon-subset';
+import { CurrentUserService } from './services/currentUser.service';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,7 @@ export class AppComponent implements OnInit {
   title = 'CoreUI Angular Admin Template';
 
   constructor(
+    private currentUser : CurrentUserService ,
     private router: Router,
     private titleService: Title,
     private iconSetService: IconSetService
@@ -30,5 +32,6 @@ export class AppComponent implements OnInit {
         return;
       }
     });
+    this.currentUser.setCurrentUser()
   }
 }

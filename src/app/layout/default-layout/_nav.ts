@@ -3,64 +3,64 @@ import { INavData } from '@coreui/angular';
 export const navItems: INavData[] = [
   {
     name: 'Tableau de bord',
-    url: '/dashboard',
+    url: '/dash/dashboard',
     iconComponent: { name: 'cil-speedometer' },
   },
   {
     name: 'Utilisateurs',
-    url: '/users',
+    url: '/dash/users',
     iconComponent: { name: 'cil-user' }
   },
   {
     name: 'Rendez-vous',
-    url: '/rdvs',
+    url: '/dash/rdvs',
     iconComponent: { name: 'cil-calendar' }
   },
   {
     name: 'Contacts', 
-    url: '/contacts',
+    url: '/dash/contacts',
     iconComponent: { name: 'cil-notes' },
   },
   {
     name: 'Actualités',
-    url: '/actuality',
+    url: '/dash/actuality',
     iconComponent: { name: 'cil-puzzle' },
     children: [
       {
         name: 'Ajouter une actualité',
-        url: '/addactualities',
+        url: '/dash/addactualities',
         icon: 'nav-icon-bullet'
       },
       {
         name: 'Vérifier les actualités',
-        url: '/actualities',
+        url: '/dash/actualities',
         icon: 'nav-icon-bullet'
       },
       {
         name: 'Catégorie d\'actualités',
-        url: '/addCategoryActuality',
+        url: '/dash/addCategoryActuality',
         icon: 'nav-icon-bullet'
       },
       {
         name: 'Vérifier toutes les catégories',
-        url: '/categoryActuality',
+        url: '/dash/categoryActuality',
         icon: 'nav-icon-bullet'
       }
     ]
   },
   {
     name: 'Documents',
-    url: '/documents',
+    url: '/dash/documents',
     iconComponent: { name: 'cil-cursor' },
     children: [
       {
         name: 'Ajouter un document',
-        url: '/addDocument',
+        url: '/dash/addDocument',
         icon: 'nav-icon-bullet'
       },
       {
         name: 'Vérifier les documents',
-        url: '/documents',
+        url: '/dash/documents',
         icon: 'nav-icon-bullet'
       } 
     ]

@@ -26,7 +26,7 @@ export class DetailsComponent implements OnInit {
   deleteRdv(){
     this.rdvService.deleteRdv(this.id).subscribe(res => {
       this.rdv = res;
-       this.router.navigate(['/rdvs'])
+       this.router.navigate(['/dash/rdvs'])
     });
   }
 }

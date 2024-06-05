@@ -4,11 +4,11 @@ import { DefaultLayoutComponent } from './layout';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
   {
-    path: '',
+    path: 'dash',
     component: DefaultLayoutComponent,
  
     children: [
@@ -45,6 +45,10 @@ export const routes: Routes = [
         loadChildren: () => import('./views/add-actuality/add-actuality.module').then((m) => m.AddActualityModule)
       },
       {
+        path: 'myprofile',
+        loadChildren: () => import('./views/my-profile/my-profile.module').then((m) => m.MyProfileModule)
+      },
+      {
         path: 'addDocument',
         loadChildren: () => import('./views/add-document/add-document.module').then((m) => m.AddDocumentModule)
       },
@@ -58,6 +62,9 @@ export const routes: Routes = [
       },
      ]
   },
+  {
+    path: 'login',
+    loadChildren: () => import('./views/login/login.module').then((m) => m.LoginModule)
+  },
   
-
 ];

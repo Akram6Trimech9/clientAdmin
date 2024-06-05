@@ -11,4 +11,7 @@ export class ContactService {
   getAllContacts():Observable<any[]>{ 
      return this._http.get<any[]>(`${this.url}`)
   }
+  deleteContact(id :any ) :Observable<any>{ 
+     return this._http.delete<any>(`${this.url}${id}`)
+  }
 }
