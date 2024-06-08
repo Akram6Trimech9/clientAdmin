@@ -22,5 +22,14 @@ export class ActualitiesComponent implements OnInit{
         })
     })
   }
-
+  deleteActuality(id: string): void {
+    this.actualityService.deleteActuality(id).subscribe(
+      () => {
+        this.acutalities = this.acutalities.filter((item) => item._id !== id);
+      },
+      (error) => {
+        console.error('Error deleting actuality:', error);
+      }
+    );
+  }
 }

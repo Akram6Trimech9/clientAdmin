@@ -24,7 +24,7 @@
              <td>{{item.description}}</td>
   
             <td>
-                   <a class="edit" data-toggle="modal"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                   <a (click)="deleteCategory(item._id)" class="edit" data-toggle="modal"><i class="fa fa-trash" aria-hidden="true"></i></a>
                   
               </td>
           </tr>

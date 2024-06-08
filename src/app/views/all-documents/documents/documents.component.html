@@ -16,13 +16,13 @@
           <td>{{ document.description |truncate }}</td>
 
            <td>
-            <button class="btn btn-primary btn-sm mr-2" (click)="accessDocument(document)">
+            <button class="btn btn-primary btn-sm mr-2" (click)="accessDocument(document.file)">
               Access
             </button>
-            <button class="btn btn-warning btn-sm mr-2"  >
+            <button class="btn btn-warning btn-sm mr-2" (click)="updateDocument(document._id)"  >
               Update
             </button>
-            <button class="btn btn-danger btn-sm"  >
+            <button class="btn btn-danger btn-sm"  (click)="deleteDocument(document._id)" >
               Delete
             </button>
           </td>

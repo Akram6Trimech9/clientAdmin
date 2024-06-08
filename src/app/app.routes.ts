@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { DefaultLayoutComponent } from './layout';
-
+import {LoginGuard} from './auth.guard'
 export const routes: Routes = [
   {
     path: '',
@@ -10,7 +10,7 @@ export const routes: Routes = [
   {
     path: 'dash',
     component: DefaultLayoutComponent,
- 
+    canActivate: [LoginGuard]  ,
     children: [
       {
         path: 'dashboard',
@@ -55,6 +55,10 @@ export const routes: Routes = [
       {
         path: 'documents',
         loadChildren: () => import('./views/all-documents/all-documents.module').then((m) => m.AllDocumentsModule)
+      },
+      {
+        path: 'documents/:id',
+        loadChildren: () => import('./views/document-details/document-details.module').then((m) => m.DocumentDetailsModule)
       },
       {
         path: 'rdv/:id',

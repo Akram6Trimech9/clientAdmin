@@ -30,7 +30,7 @@
              <td>{{item.category?.title}}</td>
 
             <td>
-                   <a class="edit" data-toggle="modal"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                   <a (click)="deleteActuality(item._id)" class="edit" data-toggle="modal"><i class="fa fa-trash" aria-hidden="true"></i></a>
                   
               </td>
           </tr>

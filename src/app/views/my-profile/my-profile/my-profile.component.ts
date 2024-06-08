@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
 })
 export class MyProfileComponent implements OnInit {
   profileForm!: FormGroup;
+  selectedTab: string = 'profile';  
 
   constructor(
     private formBuilder: FormBuilder,
@@ -44,7 +45,9 @@ export class MyProfileComponent implements OnInit {
       }
     });
   }
-
+  selectTab(tabName: string) {
+    this.selectedTab = tabName;
+  }
   updateUserProfile(): void {
     if (this.profileForm.valid) {
       this.authService.updateUser(this.profileForm.value, this.user._id).subscribe(

@@ -17,4 +17,14 @@ export class DocumentService {
    getDocuments() :Observable<any>{
     return this._http.get<any>(`${this.url}`)
   }
+
+  getDocument(id:any) :Observable<any>{
+    return this._http.get<any>(`${this.url}oneDocument/${id}`)
+  }
+  updateDocument(id:any,document : any) :Observable<any>{
+     return  this._http.patch<any>(`${this.url}${id}`,document)
+  }
+  deleteDocument(id:any) :Observable<any>{
+    return this._http.delete<any>(`${this.url}/${id}`)
+  }
 }

@@ -18,4 +18,14 @@ export class CategoryActualityComponent  implements OnInit{
         console.log(res,"okok")
      })
   }
+  deleteCategory(id: string): void {
+    this.categoryService.deleteCategory(id).subscribe(
+      () => {
+        this.allCategories = this.allCategories.filter((item) => item._id !== id);
+      },
+      (error) => {
+        console.error('Error deleting actuality:', error);
+      }
+    );
+  }
 }

@@ -16,4 +16,7 @@ export class CategoryService {
   createNewCategory(payload : any) :Observable<any>{ 
      return this._http.post<any>(`${this.url}`,payload)
   }
+  deleteCategory(id:any) :Observable<any>{
+    return this._http.delete<any>(`${this.url}/${id}`)
+ }
 }

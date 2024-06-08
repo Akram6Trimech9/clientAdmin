@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ContactService } from 'src/app/services/contact.service';
-
+import { MessageService} from 'src/app/services/message.service'
 @Component({
   selector: 'app-contacts',
  templateUrl: './contacts.component.html',
@@ -12,15 +12,24 @@ export class ContactsComponent implements OnInit {
   showModal = false;
   message: string = '';
 
-  constructor(private contactService : ContactService){
+  constructor(private contactService : ContactService,private messageService :MessageService){
 
 
   }
-  openModal() {
+  emailUser : string = "";
+
+  openModal(email:string) {
+    this.emailUser = email;
     this.showModal = !this.showModal;
   }
   sendMessage() {
-     console.log('Message:', this.message);
+     const rec ={
+      email : this.emailUser,
+      message : this.message
+     }
+     this.messageService.createMessage(rec).subscribe(res=>{
+      console.log(res)
+     })
      this.closeModal();
   }
   closeModal() {

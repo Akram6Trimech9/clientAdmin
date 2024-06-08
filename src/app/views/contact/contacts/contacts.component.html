@@ -25,7 +25,7 @@
                   <td>{{ item.message | truncate:20 }}</td>
                   <td>
                       <a class="edit" data-toggle="modal" (click)="deleteContact(item._id)"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                      <a class="edit" (click)="openModal()"><i style="color:blue;" class="fa-solid fa-envelope"></i></a>
+                      <a class="edit" (click)="openModal(item.email)"><i style="color:blue;" class="fa-solid fa-envelope"></i></a>
                   </td>
               </tr>
           </tbody>

@@ -15,5 +15,7 @@ export class ActualittyService {
   createActuality(payload : any) :Observable<any>{ 
      return this._http.post<any>(`${this.url}`,payload)
   }
-
+  deleteActuality(id:any) :Observable<any>{
+    return this._http.delete<any>(`${this.url}/${id}`)
+ }
 }

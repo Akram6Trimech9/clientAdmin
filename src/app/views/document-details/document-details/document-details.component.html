@@ -1,0 +1,31 @@
+<div class="container">
+    <h2>Update Document</h2>
+    <form  >
+      <div class="form-group">
+        <label for="title">Title:</label>
+        <input type="text" class="form-control" id="title" [(ngModel)]="document.title" name="title" required>
+      </div>
+      <div class="form-group">
+        <label for="category">Category:</label>
+        <input type="text" class="form-control" id="category" [(ngModel)]="document.category" name="category" required>
+      </div>
+      <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea class="form-control" id="description" [(ngModel)]="document.description" name="description" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="file">File:</label>
+        <input type="file" class="form-control-file" id="file" (change)="onFileSelected($event)" accept="image/*, application/pdf">
+        <!-- Display uploaded image or file -->
+        <div *ngIf="fileToUpload">
+          <p>Uploaded File:</p>
+          <img *ngIf="isImage" [src]="fileToUpload" class="img-fluid" alt="Uploaded Image">
+          <div *ngIf="!isImage">
+            <p>{{ fileName }}</p>
+          </div>
+        </div>
+      </div>
+      <button (click)="updateDocument()" type="submit" class="btn btn-primary" [style.background-color]="'#3fbbc0'">Update</button>
+    </form>
+  </div>
+  
