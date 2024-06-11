@@ -3,15 +3,15 @@
     <form  >
       <div class="form-group">
         <label for="title">Title:</label>
-        <input type="text" class="form-control" id="title" [(ngModel)]="document.title" name="title" required>
+        <input type="text" class="form-control" id="title" [placeholder]="prevDocument?.title"  [(ngModel)]="title" name="title" required>
       </div>
       <div class="form-group">
         <label for="category">Category:</label>
-        <input type="text" class="form-control" id="category" [(ngModel)]="document.category" name="category" required>
+        <input type="text"[placeholder]="prevDocument?.category"  class="form-control" id="category" [(ngModel)]="category" name="category" required>
       </div>
       <div class="form-group">
         <label for="description">Description:</label>
-        <textarea class="form-control" id="description" [(ngModel)]="document.description" name="description" required></textarea>
+        <textarea class="form-control" [placeholder]="prevDocument?.description"  id="description" [(ngModel)]="description" name="description" required></textarea>
       </div>
       <div class="form-group">
         <label for="file">File:</label>

@@ -23,8 +23,8 @@ export class LoginComponent {
      this.authService.login(payload).subscribe(
        (res) => {
          if(res.isAdmin){
+          this.router.navigate(['/dash'])
            this.currentUser.setCurrentUser()
-           this.router.navigate(['/dash'])
          }else{
           Swal.fire({
             icon: 'error',

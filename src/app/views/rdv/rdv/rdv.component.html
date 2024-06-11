@@ -30,11 +30,11 @@
             <td>{{rdv.status }}</td>
 
             <td>
-                <ng-container *ngIf="rdv.status === 'accepted'">
+                <ng-container *ngIf="rdv.status === 'accepted' || rdv.status === 'refused' ">
  
                   <a class="btn btn-warning" style="color: white;" data-toggle="modal" (click)="detailRdv(rdv._id)">details</a>
                 </ng-container>
-                <ng-container *ngIf="rdv.status !== 'accepted'">
+                <ng-container *ngIf="rdv.status !== 'accepted'&& rdv.status !== 'refused'">
                   <a class="btn btn-success" style="color: white;" (click)="acceptRdv(rdv)" data-toggle="modal">accept</a>
                   <a class="btn btn-danger" style="color: white;" (click)="refuseRdv(rdv)" data-toggle="modal">refuse</a>
                   <a class="btn btn-warning" style="color: white;" data-toggle="modal" (click)="detailRdv(rdv._id)" >details</a>

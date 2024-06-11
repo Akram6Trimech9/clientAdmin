@@ -5,12 +5,13 @@ import { Title } from '@angular/platform-browser';
 import { IconSetService } from '@coreui/icons-angular';
 import { iconSubset } from './icons/icon-subset';
 import { CurrentUserService } from './services/currentUser.service';
+import { LoginGuard } from './auth.guard';
 
 @Component({
   selector: 'app-root',
   template: '<router-outlet />',
   standalone: true,
-  imports: [RouterOutlet]
+  imports: [RouterOutlet] 
 })
 export class AppComponent implements OnInit {
   title = 'CoreUI Angular Admin Template';

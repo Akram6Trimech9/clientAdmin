@@ -9,7 +9,10 @@ import { DocumentService } from 'src/app/services/document.service';
 })
 export class DocumentDetailsComponent implements OnInit {
   documentId: any;
-  document: any = {};
+  title !: string  ;
+  description!:string; 
+   category!:string ; 
+   prevDocument: any 
   fileToUpload: any ;
   fileName: string = '';
   isImage: boolean = false;
@@ -30,19 +33,16 @@ export class DocumentDetailsComponent implements OnInit {
   getDocumentDetails(id: any) {
     this.documentService.getDocument(id).subscribe(
       (document: any) => {
-        this.document = document;
-      },
-      error => {
-        console.error('Error fetching document details:', error);
+        this.prevDocument = document;
       }
+     
     );
   }
-
   updateDocument() {
     const formData = new FormData();
-    formData.append('title', this.document.title);
-    formData.append('category', this.document.category);
-    formData.append('description', this.document.description);
+    formData.append('title', this.title !== undefined ? this.title : this.prevDocument.title);
+    formData.append('category', this.category !== undefined ? this.category : this.prevDocument.category);
+    formData.append('description', this.description !== undefined ? this.description : this.prevDocument.description);
   
     if (this.fileToUpload) {
       formData.append('file', this.fileToUpload);
@@ -57,6 +57,7 @@ export class DocumentDetailsComponent implements OnInit {
       }
     );
   }
+  
   onFileSelected(event: any) {
     const files = event.target.files;
     if (files.length > 0) {

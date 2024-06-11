@@ -37,7 +37,7 @@ export class AddActualityComponent implements OnInit {
       formData.append('file', this.actualityForm.get('file')?.value);
       this.actualityService.createActuality(formData).subscribe(res => {
           if(res){
-                this.router.navigate(['/actualities'])
+                this.router.navigate(['/dash/actualities'])
           }
       })
     }

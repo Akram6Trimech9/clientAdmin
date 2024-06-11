@@ -8,7 +8,7 @@ import { RdvService } from 'src/app/services/rdv.service';
   styleUrls: ['./rdv.component.scss']
 })
 export class RdvComponent implements OnInit {
-  rdvs: any[] = [];
+  rdvs !: any[]  ;
   selectedRdv: any;
 
   constructor(private rdvService: RdvService , private router :Router) {}
@@ -39,13 +39,11 @@ export class RdvComponent implements OnInit {
 
   refuseRdv(rdv: any) {
     this.rdvService.refuseRdv(rdv._id).subscribe(
-      () => {
+      (res) => {
         rdv.status = 'refused';
         this.getAllRdv();
       },
-      error => {
-        console.error('Error refusing appointment:', error);
-      }
+      
     );
   }
   

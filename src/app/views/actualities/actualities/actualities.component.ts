@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ActualittyService } from 'src/app/services/actualitty.service';
 
 @Component({
@@ -8,8 +9,8 @@ import { ActualittyService } from 'src/app/services/actualitty.service';
 })
 export class ActualitiesComponent implements OnInit{
 
- acutalities : any[] =[]
-  constructor( private actualityService : ActualittyService){
+ acutalities !: any[] 
+  constructor( private actualityService : ActualittyService , private router : Router){
 
   }
   ngOnInit(): void {
@@ -31,5 +32,8 @@ export class ActualitiesComponent implements OnInit{
         console.error('Error deleting actuality:', error);
       }
     );
+  }
+  updateActuality(id:any){ 
+     this.router.navigate([`/dash/update-actuality/${id}`])
   }
 }

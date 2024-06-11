@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 import { DefaultLayoutComponent } from './layout';
-import {LoginGuard} from './auth.guard'
-export const routes: Routes = [
+ export const routes: Routes = [
   {
     path: '',
     redirectTo: 'login',
@@ -10,8 +9,7 @@ export const routes: Routes = [
   {
     path: 'dash',
     component: DefaultLayoutComponent,
-    canActivate: [LoginGuard]  ,
-    children: [
+     children: [
       {
         path: 'dashboard',
         loadChildren: () => import('./views/dashboard/routes').then((m) => m.routes)
@@ -39,6 +37,10 @@ export const routes: Routes = [
       {
         path: 'actualities',
         loadChildren: () => import('./views/actualities/actualities.module').then((m) => m.ActualitiesModule)
+      },
+      {
+        path: 'update-actuality/:id',
+        loadChildren: () => import('./views/update-actuality/update-actuality.module').then((m) => m.UpdateActualityModule)
       },
       {
         path: 'addactualities',
