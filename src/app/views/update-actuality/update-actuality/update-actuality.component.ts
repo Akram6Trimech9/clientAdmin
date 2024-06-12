@@ -44,19 +44,41 @@ export class UpdateActualityComponent {
     })
   }
   onSubmit() {
-       const formData = new FormData();
-      formData.append('title', this.actualityForm.get('title')?.value);
-      formData.append('subtitle', this.actualityForm.get('subtitle')?.value);
-      formData.append('description', this.actualityForm.get('description')?.value);
-      formData.append('category', this.actualityForm.get('category')?.value);
-      formData.append('file', this.actualityForm.get('file')?.value);
-      this.actualityService.updateActuality(this.pageId,formData).subscribe(res => {
-          if(res){
-                this.router.navigate(['/dash/actualities'])
-          }
-      })
-   }
-
+    const formData = new FormData();
+  
+     const title = this.actualityForm.get('title');
+    if (title && title.dirty) {
+      formData.append('title', title.value);
+    }
+  
+    const subtitle = this.actualityForm.get('subtitle');
+    if (subtitle && subtitle.dirty) {
+      formData.append('subtitle', subtitle.value);
+    }
+  
+    const description = this.actualityForm.get('description');
+    if (description && description.dirty) {
+      formData.append('description', description.value);
+    }
+  
+    const category = this.actualityForm.get('category');
+    if (category && category.dirty) {
+      formData.append('category', category.value);
+    }
+  
+    const file = this.actualityForm.get('file');
+    if (file && file.dirty) {
+      formData.append('file', file.value);
+    }
+  
+     this.actualityService.updateActuality(this.pageId, formData).subscribe(res => {
+      if (res) {
+        this.router.navigate(['/dash/actualities']);
+      }
+    });
+  }
+  
+  
   onFileSelected(event: any) {
     this.actualityForm.get('file')?.setValue(event.target.files[0]);
   }
